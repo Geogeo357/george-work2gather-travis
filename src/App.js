@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 import Goal from './Card/Goal'
 import AddGoal from './AddGoal';
 import GoalGrid from './GoalGrid';
-import firebase from './shared/firebase'
+import firebase from './shared/firebase' 
 import ToggleButtons from './Toggle'
 import Badge from '@material-ui/core/Badge'; 
 import MailIcon from '@material-ui/icons/Mail'; 
