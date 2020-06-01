@@ -33,8 +33,9 @@ export default function SeeMore({ goal, buttonText }) {
   const [open, setOpen] = React.useState(false);
   const [goalData, setGoalData] = useState([]);
   const [showView, setShowView] = React.useState('BAR');
-  const [creatorName, setCreatorName] = useState([]);
-  const [inviteeName, setInviteeName] = useState([]);
+  // these names are supposed to start as empty strings
+  const [creatorName, setCreatorName] = useState("");
+  const [inviteeName, setInviteeName] = useState("");
 
   const getDayOn = () => {
     var startdate = new Date(goal["startDate"]);
@@ -121,7 +122,7 @@ export default function SeeMore({ goal, buttonText }) {
         <DialogContent>
           <div>
             <div style={{float:'left'}}>
-              <DialogContentText>
+              <DialogContentText data-testid={"SeeMoreDates"}>
                 {goal.description}
                 <br></br>
                 Started: {goal.startDate}
