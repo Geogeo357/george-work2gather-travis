@@ -69,7 +69,7 @@ test('renders appropriate more info dialog', async () => {
     };
     render(<SeeMore goal={goal} />)
     fireEvent.click(screen.getByText('See More'))
-    await waitForElement(() => screen.getByText('Close'))
-    // this next link would fail if the dialog didn't show up, so this is a valid test :)
-    fireEvent.click(screen.getByText('Close'))
+    waitForElement(() => screen.getByText('Close')).then(fireEvent.click(screen.getByText('Close'))).catch(fireEvent.click(screen.getByText('Close')))
+    // this link above would fail if the dialog didn't show up, so this is a valid test :)
+    
 });
