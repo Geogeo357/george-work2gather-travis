@@ -156,8 +156,10 @@ const App = () => {
     <div>
       <Banner user={user} invites={invites} title="Work2Gather" setGridView={setGridView}>
       </Banner>
+      {/* some slight weeks to disable login requirement so that global UI functions can be seen without an account*/}
+      <Welcome user={{displayName:'testUser'}} invites={invites} setGridView={setGridView}/>
       <br></br>
-      {user ? <AddGoal open={open} user={user} setOpen={setOpen} emailTouid={emailTouid} /> : null}
+      <AddGoal open={open} user={user} setOpen={setOpen} emailTouid={emailTouid} />
       {user ? <Container maxWidth="xl">
         <GoalGrid goals={goals} invites={invites} user={user} gridView={gridView}/>
       </Container> : null}
