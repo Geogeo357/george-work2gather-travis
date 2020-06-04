@@ -34,8 +34,8 @@ export default function SeeMore({ goal, buttonText }) {
   const [goalData, setGoalData] = useState([]);
   const [showView, setShowView] = React.useState('BAR');
   // these names are supposed to start as empty strings
-  const [creatorName, setCreatorName] = useState("");
-  const [inviteeName, setInviteeName] = useState("");
+  const [creatorName, setCreatorName] = useState("User1");
+  const [inviteeName, setInviteeName] = useState("User2");
 
   const getDayOn = () => {
     var startdate = new Date(goal["startDate"]);
@@ -70,12 +70,14 @@ export default function SeeMore({ goal, buttonText }) {
   useEffect(() => {
     const setGoalUserNames = (snap) => {
       if (snap.val()) {
-        setCreatorName(
-          snap.val()[goal["groupMembers"]["creator"]]["name"].split(" ")[0]
-        );
-        setInviteeName(
-          snap.val()[goal["groupMembers"]["invitee"]]["name"].split(" ")[0]
-        );
+        if (snap.val()[goal["groupMembers"]["creator"]]){
+          setCreatorName(
+            snap.val()[goal["groupMembers"]["creator"]]["name"].split(" ")[0]
+          );
+          setInviteeName(
+            snap.val()[goal["groupMembers"]["invitee"]]["name"].split(" ")[0]
+          );
+        }
       }
     };
 
@@ -123,7 +125,7 @@ export default function SeeMore({ goal, buttonText }) {
         <DialogContent>
           <div>
             <div style={{float:'left'}}>
-              <DialogContentText data-testid={"SeeMoreDates"}>
+              <DialogContentText>
                 {goal.description}
                 <br></br>
                 Started: {goal.startDate}
@@ -134,6 +136,7 @@ export default function SeeMore({ goal, buttonText }) {
             </div>
             <div style={{float: 'right'}}>
               { (showView === "LINE") ?
+              <div data-testid={"SeeMoreLineChart"}>
               <LineChart
                 width={500}
                 height={300}
@@ -153,9 +156,10 @@ export default function SeeMore({ goal, buttonText }) {
                 <Line name={creatorName} type="monotone" dataKey="uv" stroke="#8884d8" activeDot={{ r: 8 }} />
                	<Line name={inviteeName} type="monotone" dataKey="pv" stroke="#82ca9d" />
                	<ReferenceLine y={goal["minimum"]} label="Goal" stroke="green" strokeDasharray='5 5'  />
-              </LineChart>
+              </LineChart></div>
               :
               (showView === "BAR") ?
+              <div data-testid={"SeeMoreBarChart"}>
               <BarChart 
                 width={500} 
                 height={300} 
@@ -165,9 +169,9 @@ export default function SeeMore({ goal, buttonText }) {
                 }}
                 className={classes.form}
               >
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray="3 3"/>
                 <XAxis dataKey="name">
-                  <Label value="Days" offset={0} position="bottom" />
+                  <Label value="Days" offset={0} position="bottom" data-testid={"SeeMoreBarChart"}/>
                 </XAxis>
                 <YAxis className={classes.yaxis} label={{value: goal.metric, angle: -90, position: 'left'}}/>
                 <Tooltip />
@@ -176,8 +180,11 @@ export default function SeeMore({ goal, buttonText }) {
                 <Bar name={inviteeName} dataKey="pv" fill="#82ca9d" />
                 <ReferenceLine y={goal["minimum"]} label="Goal" stroke="green" strokeDasharray='5 5'  />
               </BarChart>
+              </div>
               :
+              <div data-testid={"SeeMoreAreaChart"}>
               <AreaChart 
+                
                 width={500} 
                 height={300} 
                 data={goalData}
@@ -206,7 +213,7 @@ export default function SeeMore({ goal, buttonText }) {
                 <Area name={creatorName} type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                 <Area name={inviteeName} type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
                 <ReferenceLine y={goal["minimum"]} label="Goal" stroke="green" strokeDasharray='5 5'  />
-              </AreaChart>}
+              </AreaChart></div>}
             </div>
           </div>
         </DialogContent>

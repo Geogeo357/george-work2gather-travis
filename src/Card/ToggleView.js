@@ -33,13 +33,13 @@ const ToggleButtonsView = ({ showView, setShowView }) => {
                         className={classes.toggleContainer}
                     >
                         <ToggleButton value="BAR" aria-label="centered" className={classes.toggleButton}>
-                            <div className={classes.toggleButton}> Bar </div>
+                            <div className={classes.toggleButton}>Bar</div>
                         </ToggleButton>
                         <ToggleButton value="LINE" aria-label="centered" >
-                            <div className={classes.toggleButton}> Line </div>
+                            <div className={classes.toggleButton}>Line</div>
                         </ToggleButton>
                         <ToggleButton value="AREA" aria-label="centered" className={classes.toggleButton}>
-                            <div className={classes.toggleButton}> Area </div>
+                            <div className={classes.toggleButton}>Area</div>
                         </ToggleButton>
                     </ToggleButtonGroup>
             </Grid>
