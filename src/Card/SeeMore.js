@@ -158,7 +158,7 @@ export default function SeeMore({ goal, buttonText }) {
                	<ReferenceLine y={goal["minimum"]} label="Goal" stroke="green" strokeDasharray='5 5'  />
               </LineChart></div>
               :
-              (showView === "LINE") ?
+              (showView === "BAR") ?
               <div data-testid={"SeeMoreBarChart"}>
               <BarChart 
                 width={500} 
